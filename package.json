@@ -1,0 +1,31 @@
+{
+  "name": "portfolio-handler-cli",
+  "version": "1.0.0",
+  "description": "A CLI to check portfolio values with respect to tokens and date.",
+  "main": "index.js",
+  "bin": {
+    "@hasnainnaeem/portfolio-handler-cli": "bin/portfolio-handler-cli",
+    "portfolio-handler-cli": "bin/portfolio-handler-cli"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cli",
+    "portfolio-handler-cli"
+  ],
+  "author": "Hasnain Naeem",
+  "license": "ISC",
+  "dependencies": {
+    "arg": "^5.0.1",
+    "axios": "^0.26.1",
+    "cli-pie": "^2.4.2",
+    "esm": "^3.2.25",
+    "fast-csv": "^4.3.6",
+    "inquirer": "^8.2.2",
+    "node-pandas": "^1.0.5"
+  }
+}
