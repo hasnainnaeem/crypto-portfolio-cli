@@ -47,6 +47,7 @@ What if transaction file keeps getting updated? Well, store the net results in a
 - Using a database would've also helped because databases are optimized for such operations. Handling a `csv` file is difficult.
 **Why these optimizations aren't implemented?**
 It was explicitly stated to use the given transactions file. So, I did not alter it or convert it into a database.
+- **A flaw in the current implementation:** When a user adds a date parameter, it'd have been suitable to return portfolio details according to token prices on that date instead of using latest price. But, the CryptoCompare API doesn't support the date parameter to fetch price details on a specific date. That's why this flaw exists.
 
 ## Task Instructions
 ### Question 1 - Programming
