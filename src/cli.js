@@ -42,6 +42,7 @@ export async function cli(args) {
     let parameters = parseArgumentsIntoOptions(args);
     let inputDataStr = parameters["date"];
     let token = parameters["token"];
+    let tokens = ["BTC", "ETH", "XRP"];
 
     // parse date and convert to epoch
     let inputDate = null;
@@ -56,6 +57,10 @@ export async function cli(args) {
         token = null;
     } else { // assume valid token
         token = token.toUpperCase();
+        if(!tokens.includes(token)){
+          console.log("Invalid command syntax. Please use this syntax: \nportfolio-handler-cli token-name date")
+          process.exit();
+        }
     }
 
     /**
