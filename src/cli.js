@@ -53,15 +53,19 @@ export async function cli(args) {
     }
     // if no value provided to token variable or if it's set all, we make token null
     // to indicate that portfolio details of all tokens are requeste
-    if (token.toLowerCase() == "none" || token.toLowerCase() == "all") {
-        token = null;
-    } else { // assume valid token
-        token = token.toUpperCase();
-        if(!tokens.includes(token)){
-          console.log("Invalid command syntax. Please use this syntax: \nportfolio-handler-cli token-name date")
-          process.exit();
+    if(token) {
+        if (token.toLowerCase() == "none" || token.toLowerCase() == "all") {
+            token = null; // if token is null, we will calculate for all tokens
+        } else { 
+            token = token.toUpperCase();
+            if(!tokens.includes(token)){
+              console.log("Invalid command syntax. Please use this syntax: \nportfolio-handler-cli token-name date")
+              console.log("Use 'all' in the place of token-name if you want to calculate w.r.t all tokens.");
+              process.exit();
+            }
         }
     }
+    
 
     /**
      * Based on parameters, there are  cases:
@@ -104,6 +108,13 @@ export async function cli(args) {
                         portfolio[row["token"]] -= parseFloat(row["amount"]);
                 }
             } else if (inputDataStr) { // case 3
+              if (inputEpoch >= row["timestamp"]) {
+                if (row["transaction_type"] == "DEPOSIT")
+                    portfolio[row["token"]] += parseFloat(row["amount"]);
+                else if (row["transaction_type"] == "WITHDRAWAL")
+                    portfolio[row["token"]] -= parseFloat(row["amount"]);
+              }
+            } else {
                 if (row["transaction_type"] == "DEPOSIT")
                     portfolio[row["token"]] += parseFloat(row["amount"]);
                 else if (row["transaction_type"] == "WITHDRAWAL")
@@ -146,9 +157,8 @@ export async function cli(args) {
                     }], {
                         legend: true
                     });
-
-                    // Stringify
-                    console.log(pieChart.toString());
+                    if(total_amount)
+                        console.log(pieChart.toString());
                 })
             }).catch(error => {
                 console.log(error);
