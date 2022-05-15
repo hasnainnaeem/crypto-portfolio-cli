@@ -1,5 +1,5 @@
 # Crypto Portfolio CLI
-A CLI to check portfolio values with respect to given token symbol and date. This was made as a take home assignment for Propine interview. Task instructions are in the end.s
+A CLI to check portfolio values with respect to given token symbol and date. 
 
 ## Instructions
 ### Install
